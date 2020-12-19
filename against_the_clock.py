@@ -1,22 +1,28 @@
 import hashlib as cip
 import requests as req
 import time
+from bs4 import BeautifulSoup
+import os
 
-url_recursos = '#'
-url_destino = '#'
+url_recursos	= '#'
+url_destino		= '#'
+
+def getFromTag(respuesta):
+	listTAG = BeautifulSoup(respuesta.text, 'html')
+	for TAG in listTAG.find_all(["h3"]):
+		return TAG.text
 
 
 
-intentos = 10
+os.system('clear')
+intentos = 2
 for a in range(intentos):
-
-	#a = time.time()
 	respuesta = req.get(url_recursos)
-	#b = time.time()
-	#print (respuesta.text, abs(b-a))
+	respuesta = getFromTag(respuesta)
+	hashRES = respuesta	
 	
-	#a = time.time()
-	dat = {'hash':cip.md5((respuesta.text).encode()).hexdigest()}
+	#dat = {'hash':cip.md5((respuesta.text).encode()).hexdigest()}
+	dat = {'hash':hash}
+	
 	respuesta = req.post(url_destino, data=dat)
-	#b = time.time()
 	print (respuesta.text)
