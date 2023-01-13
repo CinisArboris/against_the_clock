@@ -4,25 +4,23 @@ import time
 from bs4 import BeautifulSoup
 import os
 
-url_recursos	= '#'
-url_destino		= '#'
+url_resour = '#'
+url_destin = '#'
 
-def getFromTag(respuesta):
-	listTAG = BeautifulSoup(respuesta.text, 'html')
+def getFromTag(xResponse):
+	listTAG = BeautifulSoup(xResponse.text, 'html')
 	for TAG in listTAG.find_all(["h3"]):
 		return TAG.text
-
-
 
 os.system('clear')
 intentos = 2
 for a in range(intentos):
-	respuesta = req.get(url_recursos)
-	respuesta = getFromTag(respuesta)
-	hashRES = respuesta	
+	xResponse = req.get(url_resour)
+	xResponse = getFromTag(xResponse)
+	hashRES = xResponse	
 	
-	#dat = {'hash':cip.md5((respuesta.text).encode()).hexdigest()}
+	#dat = {'hash':cip.md5((xResponse.text).encode()).hexdigest()}
 	dat = {'hash':hash}
 	
-	respuesta = req.post(url_destino, data=dat)
-	print (respuesta.text)
+	xResponse = req.post(url_destin, data=dat)
+	print (xResponse.text)
